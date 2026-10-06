@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Card Cat | TCG Singles, Sealed & Feline Rescue Support</title>
+    <title>The Card Cat | TCG Singles, Sealed & Collectibles</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -117,7 +117,7 @@
                 </div>
                 <div>
                     <span class="font-heading font-bold text-2xl text-amber-950 tracking-tight block leading-none">The Card Cat</span>
-                    <span class="text-xs text-terracotta-600 font-semibold tracking-wide">Charlotte, NC • Paws & Pokemon</span>
+                    <span class="text-xs text-terracotta-600 font-semibold tracking-wide">Charlotte, NC • Cards & Collectibles</span>
                 </div>
             </a>
 
@@ -136,10 +136,10 @@
                     Contact Us
                 </a>
 
-                <button id="cartBtn" type="button" aria-label="Open cart" aria-controls="cartDrawer" aria-expanded="false" class="relative p-3 rounded-xl bg-cream-100 hover:bg-cream-200 text-amber-950 transition-all">
-                    <i class="fa-solid fa-basket-shopping text-xl"></i>
-                    <span id="cartBadge" class="absolute -top-1 -right-1 bg-terracotta-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white scale-0 transition-transform">0</span>
-                </button>
+                <a href="https://thecardcat.myshopify.com/collections/all" class="inline-flex items-center gap-2 text-sm font-bold px-4 py-2.5 rounded-xl bg-terracotta-500 text-white hover:bg-terracotta-600 transition-all">
+                    <i class="fa-solid fa-store"></i>
+                    Shop Online
+                </a>
 
                 <button id="mobileMenuBtn" type="button" aria-label="Toggle menu" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden p-3 rounded-xl bg-cream-100 hover:bg-cream-200 text-amber-950 transition-all">
                     <i class="fa-solid fa-bars text-xl"></i>
@@ -149,6 +149,7 @@
 
         <!-- Mobile Nav -->
         <nav id="mobileMenu" class="hidden md:hidden border-t border-cream-200 bg-cream-50 px-4 py-3 font-semibold text-amber-950 text-sm" aria-label="Mobile">
+            <a href="https://thecardcat.myshopify.com/collections/all" class="block py-2.5 text-terracotta-600">Shop Online</a>
             <a href="#catalog" class="block py-2.5 hover:text-terracotta-600">Catalog</a>
             <a href="#community" class="block py-2.5 hover:text-terracotta-600">Community</a>
             <a href="#mission" class="block py-2.5 hover:text-terracotta-600">Mission</a>
@@ -164,20 +165,20 @@
                     
                     <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
                         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-terracotta-500/10 text-terracotta-600 border border-terracotta-500/20 font-bold text-xs uppercase tracking-wider">
-                            <span>🐱</span> Local TCG & Feline Haven
+                            <span>🐱</span> Charlotte-Based Online TCG Shop
                         </div>
 
                         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-amber-950 leading-tight">
-                            Rare Pokemon Cards & <span class="text-terracotta-600 underline decoration-terracotta-500/30">Cat Rescue Support</span>
+                            Rare Pokemon Cards & <span class="text-terracotta-600 underline decoration-terracotta-500/30">Collectibles</span>
                         </h1>
 
                         <p class="text-lg text-amber-900/80 max-w-2xl mx-auto lg:mx-0 font-medium">
-                            Welcome to The Card Cat! We curate high-grade Pokemon singles, booster boxes, and rare collectibles while supporting cat shelters and future cat café initiatives right here in Charlotte, NC.
+                            Welcome to The Card Cat, an online shop based in Charlotte, NC. Explore Pokemon singles, sealed products, and collectibles, with shipping available. Our long-term vision includes a physical storefront where cards and a cat-friendly community can come together.
                         </p>
 
                         <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-                            <a href="#catalog" class="px-7 py-3.5 rounded-2xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-bold text-base shadow-lg shadow-terracotta-500/25 transition-all hover:-translate-y-0.5">
-                                Browse Catalog 🐉
+                            <a href="https://thecardcat.myshopify.com/collections/all" class="px-7 py-3.5 rounded-2xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-bold text-base shadow-lg shadow-terracotta-500/25 transition-all hover:-translate-y-0.5">
+                                Shop Online 🐉
                             </a>
                             <a href="#contact" data-contact class="px-7 py-3.5 rounded-2xl bg-cream-200/80 hover:bg-cream-200 text-amber-950 font-bold text-base border border-amber-950/10 transition-all">
                                 Contact Us ✉️
@@ -187,38 +188,23 @@
                         <div class="pt-6 border-t border-amber-900/10 flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-2 text-xs font-bold text-amber-900/70">
                             <span class="flex items-center gap-2"><i class="fa-solid fa-check text-sage-600"></i> Verified TCG Grades</span>
                             <span class="flex items-center gap-2"><i class="fa-solid fa-check text-sage-600"></i> Direct Email Support</span>
-                            <span class="flex items-center gap-2"><i class="fa-solid fa-check text-sage-600"></i> Safe Local Pickup/Ship</span>
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-check text-sage-600"></i> Shipping Available</span>
                         </div>
                     </div>
 
-                    <!-- Showcase Card -->
+                    <!-- Shopify Store Link -->
                     <div class="lg:col-span-5 flex justify-center">
-                        <div class="relative w-full max-w-sm bg-white p-5 rounded-3xl card-shadow border border-cream-200 transform hover:rotate-1 transition-transform">
-                            <div class="absolute -top-3 -right-3 bg-terracotta-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
-                                Featured Grail
+                        <div class="w-full max-w-sm bg-white p-8 sm:p-10 rounded-3xl card-shadow border border-cream-200 text-center">
+                            <div class="w-16 h-16 mx-auto mb-5 rounded-2xl bg-sage-100 text-sage-600 flex items-center justify-center text-3xl">
+                                <i class="fa-solid fa-store"></i>
                             </div>
-                            <div class="bg-amber-950/5 rounded-2xl p-4 mb-4 flex justify-center overflow-hidden">
-                                <img src="https://images.pokemontcg.io/swsh7/218_hir.png" 
-                                     alt="Rayquaza VMAX Alternate Art" 
-                                     class="h-80 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-300"
-                                     onerror="this.onerror=null;this.src='https://placehold.co/400x560/3D2A1D/FFFFFF?text=Rayquaza+VMAX+Alt+Art'">
-                            </div>
-                            <div class="flex items-start justify-between mb-2">
-                                <div>
-                                    <h3 class="font-bold text-xl text-amber-950">Rayquaza VMAX (Alt Art)</h3>
-                                    <p class="text-xs text-amber-900/60 font-semibold">Evolving Skies • #218/203</p>
-                                </div>
-                                <span class="bg-sage-100 text-sage-600 text-xs font-bold px-2.5 py-1 rounded-lg">PSA 10 Gem Mint</span>
-                            </div>
-                            <div class="flex items-center justify-between pt-3 border-t border-cream-200">
-                                <div>
-                                    <span class="text-xs text-amber-900/50 block font-semibold">Price</span>
-                                    <span class="text-2xl font-bold text-terracotta-600">$385.00</span>
-                                </div>
-                                <button type="button" data-add-to-cart="rayquaza-vmax-psa10" class="px-5 py-2.5 bg-amber-950 hover:bg-amber-900 text-white font-bold rounded-xl text-sm transition-all shadow">
-                                    Add To Cart
-                                </button>
-                            </div>
+                            <p class="text-xs uppercase tracking-wider font-bold text-sage-600 mb-2">Live Shopify Catalog</p>
+                            <h2 class="font-heading font-bold text-2xl text-amber-950 mb-3">Shop current inventory</h2>
+                            <p class="text-sm text-amber-900/70 font-medium mb-6">See available cards, current prices, and checkout securely in our Shopify store.</p>
+                            <a href="https://thecardcat.myshopify.com/collections/all" class="inline-flex w-full items-center justify-center gap-2 px-5 py-3 rounded-xl bg-amber-950 hover:bg-amber-900 text-white font-bold text-sm transition-all shadow">
+                                Visit The Card Cat Shop
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
                         </div>
                     </div>
 
@@ -226,45 +212,20 @@
             </div>
         </section>
 
-        <!-- Inventory Catalog Section -->
+        <!-- Shopify Catalog Section -->
         <section id="catalog" class="py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                
-                <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-6">
-                    <div>
-                        <h2 class="text-3xl font-bold text-amber-950 mb-2">Curated Inventory</h2>
-                        <p class="text-amber-900/70 text-sm max-w-lg font-medium">All singles are sleeved, top-loaded, and inspected for accuracy before shipment or local pickup.</p>
-                    </div>
-
-                    <!-- Search -->
-                    <div class="relative w-full lg:w-80">
-                        <label for="catalogSearch" class="sr-only">Search the catalog</label>
-                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-amber-900/40 text-sm pointer-events-none"></i>
-                        <input id="catalogSearch" type="search" placeholder="Search cards, sets, apparel..." autocomplete="off"
-                               class="w-full bg-white border border-cream-300 focus:border-terracotta-500 rounded-xl pl-10 pr-4 py-3 text-sm text-amber-950 focus:outline-none transition-all font-medium">
-                    </div>
-                </div>
-
-                <!-- Category tabs -->
-                <div id="filterTabs" class="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Catalog categories">
-                    <button type="button" role="tab" data-filter="all" aria-selected="true" class="filter-btn px-4 py-2 rounded-xl font-bold text-xs shadow-sm transition-all">All Cards</button>
-                    <button type="button" role="tab" data-filter="singles" aria-selected="false" class="filter-btn px-4 py-2 rounded-xl font-bold text-xs transition-all">Graded Singles</button>
-                    <button type="button" role="tab" data-filter="sealed" aria-selected="false" class="filter-btn px-4 py-2 rounded-xl font-bold text-xs transition-all">Sealed Packs</button>
-                    <button type="button" role="tab" data-filter="apparel" aria-selected="false" class="filter-btn px-4 py-2 rounded-xl font-bold text-xs transition-all">Cat Apparel</button>
-                </div>
-
-                <!-- Products Grid (rendered from the PRODUCTS list in the script below) -->
-                <div id="productGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
-
-                <!-- Empty State -->
-                <div id="catalogEmpty" class="hidden text-center py-16 bg-white rounded-2xl border border-cream-200">
-                    <p class="text-4xl mb-2">🙀</p>
-                    <p class="font-bold text-amber-950">No items match your search.</p>
-                    <p class="text-sm text-amber-900/60 font-medium mt-1">Looking for something specific?
-                        <a href="#contact" data-contact data-contact-subject="Card Single / Inventory Inquiry" class="text-terracotta-600 font-bold underline">Contact us</a> and we'll hunt it down.
+                <div class="max-w-3xl mx-auto text-center">
+                    <p class="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-bold text-sage-600 mb-3">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Shopify Catalog
                     </p>
+                    <h2 class="text-3xl font-bold text-amber-950 mb-3">Shop current inventory</h2>
+                    <p class="text-amber-900/70 text-sm max-w-lg mx-auto mb-6 font-medium">Browse available cards and current prices in our Shopify store, where you can place your order securely.</p>
+                    <a href="https://thecardcat.myshopify.com/collections/all" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-bold transition-all shadow-md">
+                        Shop All Products
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
-
             </div>
         </section>
 
@@ -273,70 +234,70 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10">
                     <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-terracotta-500/10 text-terracotta-600 font-bold text-xs uppercase tracking-wider mb-2">
-                        <i class="fa-solid fa-users"></i> Charlotte TCG Community
+                        <i class="fa-solid fa-users"></i> Future Community Vision
                     </span>
-                    <h2 class="text-3xl font-bold text-amber-950">Collect, Trade & Hang Out</h2>
+                    <h2 class="text-3xl font-bold text-amber-950">A Community We Hope to Build</h2>
                     <p class="text-amber-900/70 text-sm mt-2 max-w-xl mx-auto font-medium">
-                        The Card Cat is more than a shop — it's a friendly corner of Charlotte for collectors, players, and cat lovers alike.
+                        We are an online shop today. As The Card Cat grows, we hope to create an in-person gathering place for Charlotte collectors and cat lovers.
                     </p>
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-6">
                     <div class="bg-white rounded-2xl p-6 border border-cream-200 card-shadow">
                         <div class="w-12 h-12 rounded-xl bg-terracotta-500/10 text-terracotta-600 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-right-left"></i></div>
-                        <h3 class="font-bold text-lg text-amber-950 mb-1">Trade Nights</h3>
-                        <p class="text-sm text-amber-900/70 font-medium">Bring your binder, swap duplicates, and get friendly advice on grading and pricing.</p>
+                        <h3 class="font-bold text-lg text-amber-950 mb-1">Future Trade Nights</h3>
+                        <p class="text-sm text-amber-900/70 font-medium">A future storefront could bring collectors together to trade cards and share collecting tips.</p>
                     </div>
                     <div class="bg-white rounded-2xl p-6 border border-cream-200 card-shadow">
                         <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-600 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-box-open"></i></div>
-                        <h3 class="font-bold text-lg text-amber-950 mb-1">Pack Opening Meetups</h3>
-                        <p class="text-sm text-amber-900/70 font-medium">Rip new sets together and celebrate the big pulls with fellow collectors.</p>
+                        <h3 class="font-bold text-lg text-amber-950 mb-1">Pack-Opening Meetups</h3>
+                        <p class="text-sm text-amber-900/70 font-medium">We hope to host pack-opening get-togethers once we have a place for the community to meet.</p>
                     </div>
                     <div class="bg-white rounded-2xl p-6 border border-cream-200 card-shadow">
                         <div class="w-12 h-12 rounded-xl bg-amber-950/5 text-amber-950 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-cat"></i></div>
-                        <h3 class="font-bold text-lg text-amber-950 mb-1">Shelter Charity Events</h3>
-                        <p class="text-sm text-amber-900/70 font-medium">Community fundraisers where every trade and raffle ticket helps local rescue cats.</p>
+                        <h3 class="font-bold text-lg text-amber-950 mb-1">Future Cat-Community Support</h3>
+                        <p class="text-sm text-amber-900/70 font-medium">Cat-focused community support is part of our long-term mission, not an active program today.</p>
                     </div>
                 </div>
 
                 <div class="text-center mt-8">
-                    <a href="#contact" data-contact data-contact-subject="Community Events & Meetups" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-950 hover:bg-amber-900 text-white font-bold text-sm transition-all shadow">
-                        <i class="fa-solid fa-calendar-days"></i> Ask About Upcoming Events
+                    <a href="#contact" data-contact data-contact-subject="Future Community & Storefront Idea" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-950 hover:bg-amber-900 text-white font-bold text-sm transition-all shadow">
+                        <i class="fa-solid fa-calendar-days"></i> Share a Future Idea
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Mission Section -->
+        <!-- Future Mission Section -->
         <section id="mission" class="py-16 bg-sage-100/50 border-y border-sage-500/10">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="bg-white rounded-3xl p-8 sm:p-12 card-shadow border border-sage-500/20 grid lg:grid-cols-12 gap-8 items-center">
                     <div class="lg:col-span-8 space-y-4">
                         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sage-500/10 text-sage-600 font-bold text-xs uppercase tracking-wider">
-                            <i class="fa-solid fa-heart"></i> Charlotte Feline Support
+                            <i class="fa-solid fa-heart"></i> A Long-Term Goal
                         </span>
-                        <h2 class="text-3xl font-bold text-amber-950">Every Sale Helps Local Cat Rescues</h2>
+                        <h2 class="text-3xl font-bold text-amber-950">A Future Storefront for Cards & Cats</h2>
                         <p class="text-amber-900/80 font-medium text-base leading-relaxed">
-                            At The Card Cat, our passion isn't limited to shiny cardboard—we are actively committed to helping stray and shelter cats in Charlotte, North Carolina. A percentage of proceeds go directly toward funding cat food, vet checkups, and building towards our vision of a local combined TCG shop and Cat Café!
+                            Today, The Card Cat is an online trading card shop. Our long-term mission is to grow into a welcoming physical storefront where collectors can connect and cat-focused community support can have a home. We do not currently operate a storefront or an active rescue-support program; this is a future goal we're working toward.
                         </p>
                         <div class="flex flex-wrap gap-6 pt-2 text-sm font-bold text-amber-950">
                             <div class="flex items-center gap-2">
                                 <div class="w-8 h-8 rounded-full bg-sage-100 flex items-center justify-center text-sage-600"><i class="fa-solid fa-paw"></i></div>
-                                Shelter Food Donations
+                                A Place for Collectors to Gather
                             </div>
                             <div class="flex items-center gap-2">
                                 <div class="w-8 h-8 rounded-full bg-sage-100 flex items-center justify-center text-sage-600"><i class="fa-solid fa-house-chimney-medical"></i></div>
-                                Foster Care Support
+                                Future Cat-Friendly Community Space
                             </div>
                         </div>
                     </div>
 
                     <div class="lg:col-span-4 bg-cream-100 p-6 rounded-2xl border border-cream-200 text-center space-y-3">
                         <div class="text-4xl">🐱☕✨</div>
-                        <h3 class="font-bold text-lg text-amber-950">Cat Café Vision</h3>
-                        <p class="text-xs text-amber-900/70 font-medium">Looking to partner or sponsor our Charlotte shelter events? Reach out directly via our contact form below!</p>
-                        <a href="#contact" data-contact data-contact-subject="Charlotte Shelter / Cat Café Partnership" class="inline-block w-full py-2.5 rounded-xl bg-sage-600 hover:bg-sage-500 text-white font-bold text-sm transition-all shadow-sm">
-                            Partner With Us
+                        <h3 class="font-bold text-lg text-amber-950">The Storefront We Hope to Build</h3>
+                        <p class="text-xs text-amber-900/70 font-medium">A physical shop and welcoming community space are part of our future vision. For now, we're an online shop.</p>
+                        <a href="#contact" data-contact data-contact-subject="Future Storefront / Cat Café Idea" class="inline-block w-full py-2.5 rounded-xl bg-sage-600 hover:bg-sage-500 text-white font-bold text-sm transition-all shadow-sm">
+                            Contact Us
                         </a>
                     </div>
                 </div>
@@ -353,7 +314,7 @@
                     </span>
                     <h2 class="text-3xl sm:text-4xl font-bold text-amber-950">Contact The Card Cat</h2>
                     <p class="text-amber-900/70 text-sm mt-2 max-w-lg mx-auto font-medium">
-                        Have a question about card availability, sealed products, or cat shelter partnerships? Send us a message below and it goes straight to <strong class="text-amber-950">contact@thecardcat.biz</strong>.
+                        Have a question about card availability, sealed products, an order, or our future storefront vision? Send us a message below and it goes straight to <strong class="text-amber-950">contact@thecardcat.biz</strong>.
                     </p>
                 </div>
 
@@ -423,7 +384,7 @@
                                 <option value="Cat Apparel"></option>
                                 <option value="Order Request"></option>
                                 <option value="Community Events & Meetups"></option>
-                                <option value="Charlotte Shelter / Cat Café Partnership"></option>
+                                <option value="Future Storefront / Cat Café Idea"></option>
                                 <option value="General Question"></option>
                             </datalist>
                         </div>
@@ -461,50 +422,6 @@
         </section>
     </main>
 
-    <!-- Slide-over Cart Drawer (hidden from hit-testing while closed, see #cartDrawer styles) -->
-    <div id="cartDrawer" class="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
-        <!-- Backdrop -->
-        <div id="cartBackdrop" class="absolute inset-0 bg-amber-950/40 backdrop-blur-sm"></div>
-
-        <!-- Content panel -->
-        <div id="cartPanel" class="absolute inset-y-0 right-0 w-full max-w-md bg-white card-shadow flex flex-col">
-                
-            <div class="p-6 border-b border-cream-200 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-basket-shopping text-terracotta-600 text-xl"></i>
-                    <h2 id="cartTitle" class="text-xl font-bold text-amber-950">Your Cart</h2>
-                </div>
-                <button id="closeCartBtn" type="button" aria-label="Close cart" class="p-2 text-amber-900/60 hover:text-amber-950 rounded-lg">
-                    <i class="fa-solid fa-xmark text-xl"></i>
-                </button>
-            </div>
-
-            <!-- Items List -->
-            <div id="cartItems" class="p-6 overflow-y-auto flex-1 divide-y divide-cream-100"></div>
-
-            <!-- Footer Summary -->
-            <div class="p-6 border-t border-cream-200 bg-cream-50/50 space-y-4">
-                <div class="flex items-center justify-between font-bold text-lg text-amber-950">
-                    <span>Subtotal</span>
-                    <span id="cartSubtotal">$0.00</span>
-                </div>
-                <p class="text-xs text-amber-900/60 font-medium">Taxes and local Charlotte pickup / shipping are confirmed by email when we reply to your order request.</p>
-                <button id="checkoutBtn" type="button" class="w-full py-3.5 rounded-xl bg-terracotta-500 hover:bg-terracotta-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold transition-all shadow-md">
-                    Proceed To Checkout
-                </button>
-                <div class="flex items-center justify-between text-xs font-bold">
-                    <button id="continueShoppingBtn" type="button" class="text-amber-900/70 hover:text-terracotta-600">
-                        <i class="fa-solid fa-arrow-left"></i> Continue shopping
-                    </button>
-                    <button id="clearCartBtn" type="button" class="text-amber-900/50 hover:text-terracotta-600 disabled:opacity-40 disabled:cursor-not-allowed">
-                        Clear cart
-                    </button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer class="bg-amber-950 text-cream-100 py-12 border-t border-amber-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -540,21 +457,6 @@
 
     <!-- Client JavaScript -->
     <script>
-        // Product catalog. `category` maps to the filter tabs: singles | sealed | apparel.
-        const PRODUCTS = [
-            { id: 'rayquaza-vmax-psa10', title: 'Rayquaza VMAX (Alt Art)', set: 'Evolving Skies • #218/203', price: 385, category: 'singles', badge: 'PSA 10', badgeClass: 'bg-sage-600', image: 'https://images.pokemontcg.io/swsh7/218_hir.png' },
-            { id: 'charizard-vmax', title: 'Charizard VMAX', set: 'Vivid Voltage • #044/185', price: 42, category: 'singles', badge: 'NM/Mint', badgeClass: 'bg-amber-950', image: 'https://images.pokemontcg.io/swsh4/44_hir.png' },
-            { id: 'gengar-vmax-psa9', title: 'Gengar VMAX Alt Art', set: 'Fusion Strike • #251/264', price: 215, category: 'singles', badge: 'PSA 9', badgeClass: 'bg-sage-600', image: 'https://images.pokemontcg.io/swsh8/251_hir.png' },
-            { id: 'arceus-vstar', title: 'Arceus VSTAR Secret', set: 'Brilliant Stars • #172/172', price: 24, category: 'singles', badge: 'NM/Mint', badgeClass: 'bg-amber-950', image: 'https://images.pokemontcg.io/swsh9/172_hir.png' },
-            { id: 'sv-151-bundle', title: 'Scarlet & Violet: 151 Bundle', set: '6 Sealed Booster Packs', price: 38.5, category: 'sealed', badge: 'Sealed', badgeClass: 'bg-terracotta-500', image: 'https://images.pokemontcg.io/sv3pt5/logo.png', imageClass: 'p-4' },
-            { id: 'card-cat-tee', title: 'The Card Cat Logo Tee', set: 'Unisex cotton • S–XXL', price: 28, category: 'apparel', badge: 'Apparel', badgeClass: 'bg-terracotta-500', image: 'https://placehold.co/300x400/E06D53/FFFFFF?text=Card+Cat+Tee' },
-            { id: 'paws-pokemon-hoodie', title: 'Paws & Pokemon Hoodie', set: 'Fleece pullover • S–XXL', price: 48, category: 'apparel', badge: 'Apparel', badgeClass: 'bg-terracotta-500', image: 'https://placehold.co/300x400/3D2A1D/FFFFFF?text=Paws+%26+Pokemon+Hoodie' }
-        ];
-
-        const formatPrice = (n) => `$${n.toFixed(2)}`;
-        const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-        const fallbackImage = (title) => `https://placehold.co/300x400/EFE7D8/3D2A1D?text=${encodeURIComponent(title)}`;
-
         document.addEventListener('DOMContentLoaded', () => {
             const header = document.querySelector('header');
 
@@ -649,6 +551,12 @@
                     submitBtn.innerHTML = submitBtnHtml;
                 }
             });
+
+            if (location.hash.length > 1 && document.getElementById(location.hash.slice(1))) {
+                setTimeout(() => scrollToSection(location.hash.slice(1)), 50);
+            }
+
+            return;
 
             // ---------- Catalog filters & search ----------
             const productGrid = document.getElementById('productGrid');
