@@ -123,7 +123,8 @@
 
             <!-- Nav Links -->
             <nav class="hidden md:flex items-center gap-8 font-semibold text-amber-900/80 text-sm" aria-label="Main">
-                <a href="#catalog" class="hover:text-terracotta-600 transition-colors">Catalog</a>
+                <a href="#singles" class="hover:text-terracotta-600 transition-colors">View Singles</a>
+                <a href="#sealed" class="hover:text-terracotta-600 transition-colors">Sealed &amp; Custom</a>
                 <a href="#community" class="hover:text-terracotta-600 transition-colors">Community</a>
                 <a href="#mission" class="hover:text-terracotta-600 transition-colors">Mission</a>
                 <a href="#contact" data-contact class="hover:text-terracotta-600 transition-colors">Contact</a>
@@ -138,7 +139,7 @@
 
                 <a href="https://thecardcat.myshopify.com/collections/all" class="inline-flex items-center gap-2 text-sm font-bold px-4 py-2.5 rounded-xl bg-terracotta-500 text-white hover:bg-terracotta-600 transition-all">
                     <i class="fa-solid fa-store"></i>
-                    Shop Online
+                    Sealed &amp; Custom
                 </a>
 
                 <button id="mobileMenuBtn" type="button" aria-label="Toggle menu" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden p-3 rounded-xl bg-cream-100 hover:bg-cream-200 text-amber-950 transition-all">
@@ -149,8 +150,8 @@
 
         <!-- Mobile Nav -->
         <nav id="mobileMenu" class="hidden md:hidden border-t border-cream-200 bg-cream-50 px-4 py-3 font-semibold text-amber-950 text-sm" aria-label="Mobile">
-            <a href="https://thecardcat.myshopify.com/collections/all" class="block py-2.5 text-terracotta-600">Shop Online</a>
-            <a href="#catalog" class="block py-2.5 hover:text-terracotta-600">Catalog</a>
+            <a href="#singles" class="block py-2.5 text-terracotta-600">View Singles</a>
+            <a href="https://thecardcat.myshopify.com/collections/all" class="block py-2.5 text-terracotta-600">Sealed &amp; Custom on Shopify</a>
             <a href="#community" class="block py-2.5 hover:text-terracotta-600">Community</a>
             <a href="#mission" class="block py-2.5 hover:text-terracotta-600">Mission</a>
             <a href="#contact" data-contact class="block py-2.5 hover:text-terracotta-600">Contact</a>
@@ -173,12 +174,15 @@
                         </h1>
 
                         <p class="text-lg text-amber-900/80 max-w-2xl mx-auto lg:mx-0 font-medium">
-                            Welcome to The Card Cat, an online shop based in Charlotte, NC. Explore Pokemon singles, sealed products, and collectibles, with shipping available. Our long-term vision includes a physical storefront where cards and a cat-friendly community can come together.
+                            Welcome to The Card Cat, an online shop based in Charlotte, NC. Browse Pokemon singles on TCGplayer, and shop sealed and custom products through Shopify. Shipping available. Our long-term vision includes a physical storefront where cards and a cat-friendly community can come together.
                         </p>
 
                         <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-                            <a href="https://thecardcat.myshopify.com/collections/all" class="px-7 py-3.5 rounded-2xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-bold text-base shadow-lg shadow-terracotta-500/25 transition-all hover:-translate-y-0.5">
-                                Shop Online 🐉
+                            <a href="#singles" class="px-7 py-3.5 rounded-2xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-bold text-base shadow-lg shadow-terracotta-500/25 transition-all hover:-translate-y-0.5">
+                                View Singles 🃏
+                            </a>
+                            <a href="https://thecardcat.myshopify.com/collections/all" class="px-7 py-3.5 rounded-2xl bg-cream-200/80 hover:bg-cream-200 text-amber-950 font-bold text-base border border-amber-950/10 transition-all">
+                                Sealed &amp; Custom on Shopify
                             </a>
                             <a href="#contact" data-contact class="px-7 py-3.5 rounded-2xl bg-cream-200/80 hover:bg-cream-200 text-amber-950 font-bold text-base border border-amber-950/10 transition-all">
                                 Contact Us ✉️
@@ -192,17 +196,17 @@
                         </div>
                     </div>
 
-                    <!-- Shopify Store Link -->
+                    <!-- Shopify Sealed & Custom Store Link -->
                     <div class="lg:col-span-5 flex justify-center">
                         <div class="w-full max-w-sm bg-white p-8 sm:p-10 rounded-3xl card-shadow border border-cream-200 text-center">
                             <div class="w-16 h-16 mx-auto mb-5 rounded-2xl bg-sage-100 text-sage-600 flex items-center justify-center text-3xl">
                                 <i class="fa-solid fa-store"></i>
                             </div>
-                            <p class="text-xs uppercase tracking-wider font-bold text-sage-600 mb-2">Live Shopify Catalog</p>
-                            <h2 class="font-heading font-bold text-2xl text-amber-950 mb-3">Shop current inventory</h2>
-                            <p class="text-sm text-amber-900/70 font-medium mb-6">See available cards, current prices, and checkout securely in our Shopify store.</p>
+                            <p class="text-xs uppercase tracking-wider font-bold text-sage-600 mb-2">Sealed &amp; Custom Products</p>
+                            <h2 class="font-heading font-bold text-2xl text-amber-950 mb-3">Shop on Shopify</h2>
+                            <p class="text-sm text-amber-900/70 font-medium mb-6">Browse sealed products and custom items in our Shopify store. For individual cards, visit the Singles section.</p>
                             <a href="https://thecardcat.myshopify.com/collections/all" class="inline-flex w-full items-center justify-center gap-2 px-5 py-3 rounded-xl bg-amber-950 hover:bg-amber-900 text-white font-bold text-sm transition-all shadow">
-                                Visit The Card Cat Shop
+                                Shop Sealed &amp; Custom
                                 <i class="fa-solid fa-arrow-up-right-from-square"></i>
                             </a>
                         </div>
@@ -212,18 +216,59 @@
             </div>
         </section>
 
-        <!-- Shopify Catalog Section -->
+        <!-- Singles Catalog Section -->
         <section id="catalog" class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div id="singles" class="max-w-3xl mx-auto text-center scroll-mt-24">
+                    <p class="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-bold text-sage-600 mb-3">
+                        <i class="fa-solid fa-layer-group"></i> Pokemon Singles on TCGplayer
+                    </p>
+                    <h2 class="text-3xl font-bold text-amber-950 mb-3">Featured Single</h2>
+                    <p class="text-amber-900/70 text-sm max-w-lg mx-auto mb-8 font-medium">Singles are listed separately from sealed and custom products. Browse our example card below.</p>
+                </div>
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 items-stretch">
+                    <article class="bg-white rounded-3xl p-7 sm:p-9 border border-cream-200 card-shadow flex flex-col justify-center">
+                        <div class="w-14 h-14 rounded-2xl bg-terracotta-500/10 text-terracotta-600 flex items-center justify-center text-2xl mb-5">
+                            <i class="fa-regular fa-address-card"></i>
+                        </div>
+                        <p class="text-xs uppercase tracking-wider font-bold text-sage-600 mb-2">Example Inventory</p>
+                        <h3 class="font-heading font-bold text-2xl text-amber-950 mb-2">Sabrina's Haunter</h3>
+                        <p class="text-sm text-amber-900/70 font-medium mb-5">1st Edition · Gym Heroes · 58/132</p>
+                        <p class="text-3xl font-heading font-bold text-amber-950 mb-1">$63.84</p>
+                        <p class="text-xs text-amber-900/60 mb-6">TCGplayer market price reference · checked October 6, 2026. Actual value varies by condition and edition.</p>
+                        <a href="https://www.tcgplayer.com/product/88878/pokemon-gym-heroes-sabrinas-haunter" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-cream-100 hover:bg-cream-200 text-amber-950 font-bold text-sm transition-all border border-cream-200">
+                            View card on TCGplayer
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </article>
+                    <div class="rounded-3xl p-7 sm:p-9 bg-amber-950 text-cream-100 card-shadow flex flex-col justify-center">
+                        <div class="w-14 h-14 rounded-2xl bg-white/10 text-cream-100 flex items-center justify-center text-2xl mb-5">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <p class="text-xs uppercase tracking-wider font-bold text-cream-300 mb-2">Shop More Singles</p>
+                        <h3 class="font-heading font-bold text-2xl text-white mb-3">Explore our TCGplayer inventory</h3>
+                        <p class="text-sm text-cream-200/80 font-medium mb-6">The public seller storefront link will go here once it is available. For now, browse Sabrina's Haunter on TCGplayer.</p>
+                        <a href="https://www.tcgplayer.com/search/pokemon/product?productLineName=pokemon&amp;q=Sabrina%27s%20Haunter" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-bold text-sm transition-all shadow">
+                            View all inventory on TCGplayer
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shopify Sealed & Custom Products Section -->
+        <section id="sealed" class="py-16 bg-cream-100/60 border-t border-cream-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="max-w-3xl mx-auto text-center">
                     <p class="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-bold text-sage-600 mb-3">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Shopify Catalog
+                        <i class="fa-solid fa-store"></i> Sealed &amp; Custom Products on Shopify
                     </p>
-                    <h2 class="text-3xl font-bold text-amber-950 mb-3">Shop current inventory</h2>
-                    <p class="text-amber-900/70 text-sm max-w-lg mx-auto mb-6 font-medium">Browse available cards and current prices in our Shopify store, where you can place your order securely.</p>
+                    <h2 class="text-3xl font-bold text-amber-950 mb-3">Shop Sealed &amp; Custom Products</h2>
+                    <p class="text-amber-900/70 text-sm max-w-lg mx-auto mb-6 font-medium">Shopify is our home for sealed product and custom items. Individual singles are listed in the TCGplayer Singles section.</p>
                     <a href="https://thecardcat.myshopify.com/collections/all" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-bold transition-all shadow-md">
-                        Shop All Products
-                        <i class="fa-solid fa-arrow-right"></i>
+                        Shop Sealed &amp; Custom on Shopify
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
                 </div>
             </div>
@@ -435,7 +480,8 @@
                 </a>
 
                 <nav class="flex flex-wrap items-center justify-center gap-6 text-sm font-semibold text-cream-200/80" aria-label="Footer">
-                    <a href="#catalog" class="hover:text-terracotta-500 transition-colors">Catalog</a>
+                    <a href="#singles" class="hover:text-terracotta-500 transition-colors">View Singles</a>
+                    <a href="#sealed" class="hover:text-terracotta-500 transition-colors">Sealed &amp; Custom</a>
                     <a href="#community" class="hover:text-terracotta-500 transition-colors">Community</a>
                     <a href="#mission" class="hover:text-terracotta-500 transition-colors">Mission</a>
                     <a href="#contact" data-contact class="hover:text-terracotta-500 transition-colors">Contact</a>
