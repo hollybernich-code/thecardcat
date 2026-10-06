@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Card Cat | TCG Singles, Sealed & Feline Rescue Support</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            50: '#FDFBF7',
+                            100: '#F7F3EB',
+                            200: '#EFE7D8',
+                            300: '#E4D7C2'
+                        },
+                        terracotta: {
+                            500: '#E06D53',
+                            600: '#CC583E',
+                            700: '#B2452D'
+                        },
+                        sage: {
+                            100: '#E7EFEA',
+                            500: '#688F78',
+                            600: '#537560'
+                        },
+                        amber: {
+                            900: '#3D2A1D',
+                            950: '#281A12'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Fredoka', 'cursive', 'sans-serif'],
+                        body: ['Quicksand', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #FDFBF7;
+            color: #281A12;
+        }
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Fredoka', cursive;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Keep section headings clear of the sticky header when scrolled to */
+        section[id] {
+            scroll-margin-top: 6rem;
+        }
+        .card-shadow {
+            box-shadow: 0 10px 30px -5px rgba(61, 42, 29, 0.08);
+        }
+        .card-shadow-hover:hover {
+            box-shadow: 0 15px 35px -5px rgba(224, 109, 83, 0.18);
+        }
+        /* Cart drawer: `visibility: hidden` removes the whole overlay (including children)
+           from hit-testing while closed, so it can never block clicks on the page. */
+        #cartDrawer {
+            visibility: hidden;
+            transition: visibility 0s linear 300ms;
+        }
+        #cartDrawer.is-open {
+            visibility: visible;
+            transition-delay: 0s;
+        }
+        #cartBackdrop {
+            opacity: 0;
+            transition: opacity 300ms ease;
+        }
+        #cartDrawer.is-open #cartBackdrop {
+            opacity: 1;
+        }
+        #cartPanel {
+            transform: translateX(100%);
+            transition: transform 300ms ease;
+        }
+        #cartDrawer.is-open #cartPanel {
+            transform: translateX(0);
+        }
+        @keyframes highlight-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(224, 109, 83, 0.45); }
+            100% { box-shadow: 0 0 0 18px rgba(224, 109, 83, 0); }
+        }
+        .form-highlight {
+            animation: highlight-pulse 900ms ease-out;
+        }
+    </style>
+</head>
+<body id="top" class="min-h-screen flex flex-col justify-between selection:bg-terracotta-500 selection:text-white">
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-cream-50/90 backdrop-blur-md border-b border-cream-200 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#top" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-2xl bg-terracotta-500 text-white flex items-center justify-center text-2xl shadow-md group-hover:scale-105 transition-transform">
+                    🐾
+                </div>
+                <div>
+                    <span class="font-heading font-bold text-2xl text-amber-950 tracking-tight block leading-none">The Card Cat</span>
+                    <span class="text-xs text-terracotta-600 font-semibold tracking-wide">Charlotte, NC • Paws & Pokemon</span>
+                </div>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 font-semibold text-amber-900/80 text-sm" aria-label="Main">
+                <a href="#catalog" class="hover:text-terracotta-600 transition-colors">Catalog</a>
+                <a href="#community" class="hover:text-terracotta-600 transition-colors">Community</a>
+                <a href="#mission" class="hover:text-terracotta-600 transition-colors">Mission</a>
+                <a href="#contact" data-contact class="hover:text-terracotta-600 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-3">
+                <a href="#contact" data-contact class="hidden lg:inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl bg-sage-100 text-sage-600 border border-sage-500/20 hover:bg-sage-500 hover:text-white transition-all">
+                    <i class="fa-solid fa-envelope"></i>
+                    Contact Us
+                </a>
+
+                <button id="cartBtn" type="button" aria-label="Open cart" aria-controls="cartDrawer" aria-expanded="false" class="relative p-3 rounded-xl bg-cream-100 hover:bg-cream-200 text-amber-950 transition-all">
+                    <i class="fa-solid fa-basket-shopping text-xl"></i>
+                    <span id="cartBadge" class="absolute -top-1 -right-1 bg-terracotta-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white scale-0 transition-transform">0</span>
+                </button>
+
+                <button id="mobileMenuBtn" type="button" aria-label="Toggle menu" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden p-3 rounded-xl bg-cream-100 hover:bg-cream-200 text-amber-950 transition-all">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav -->
+        <nav id="mobileMenu" class="hidden md:hidden border-t border-cream-200 bg-cream-50 px-4 py-3 font-semibold text-amber-950 text-sm" aria-label="Mobile">
+            <a href="#catalog" class="block py-2.5 hover:text-terracotta-600">Catalog</a>
+            <a href="#community" class="block py-2.5 hover:text-terracotta-600">Community</a>
+            <a href="#mission" class="block py-2.5 hover:text-terracotta-600">Mission</a>
+            <a href="#contact" data-contact class="block py-2.5 hover:text-terracotta-600">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative pt-8 pb-16 lg:py-20 overflow-hidden bg-gradient-to-b from-cream-100/60 to-cream-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-terracotta-500/10 text-terracotta-600 border border-terracotta-500/20 font-bold text-xs uppercase tracking-wider">
+                            <span>🐱</span> Local TCG & Feline Haven
+                        </div>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-amber-950 leading-tight">
+                            Rare Pokemon Cards & <span class="text-terracotta-600 underline decoration-terracotta-500/30">Cat Rescue Support</span>
+                        </h1>
+
+                        <p class="text-lg text-amber-900/80 max-w-2xl mx-auto lg:mx-0 font-medium">
+                            Welcome to The Card Cat! We curate high-grade Pokemon singles, booster boxes, and rare collectibles while supporting cat shelters and future cat café initiatives right here in Charlotte, NC.
+                        </p>
+
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                            <a href="#catalog" class="px-7 py-3.5 rounded-2xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-bold text-base shadow-lg shadow-terracotta-500/25 transition-all hover:-translate-y-0.5">
+                                Browse Catalog 🐉
+                            </a>
+                            <a href="#contact" data-contact class="px-7 py-3.5 rounded-2xl bg-cream-200/80 hover:bg-cream-200 text-amber-950 font-bold text-base border border-amber-950/10 transition-all">
+                                Contact Us ✉️
+                            </a>
+                        </div>
+
+                        <div class="pt-6 border-t border-amber-900/10 flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-2 text-xs font-bold text-amber-900/70">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-check text-sage-600"></i> Verified TCG Grades</span>
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-check text-sage-600"></i> Direct Email Support</span>
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-check text-sage-600"></i> Safe Local Pickup/Ship</span>
+                        </div>
+                    </div>
+
+                    <!-- Showcase Card -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-full max-w-sm bg-white p-5 rounded-3xl card-shadow border border-cream-200 transform hover:rotate-1 transition-transform">
+                            <div class="absolute -top-3 -right-3 bg-terracotta-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+                                Featured Grail
+                            </div>
+                            <div class="bg-amber-950/5 rounded-2xl p-4 mb-4 flex justify-center overflow-hidden">
+                                <img src="https://images.pokemontcg.io/swsh7/218_hir.png" 
+                                     alt="Rayquaza VMAX Alternate Art" 
+                                     class="h-80 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-300"
+                                     onerror="this.onerror=null;this.src='https://placehold.co/400x560/3D2A1D/FFFFFF?text=Rayquaza+VMAX+Alt+Art'">
+                            </div>
+                            <div class="flex items-start justify-between mb-2">
+                                <div>
+                                    <h3 class="font-bold text-xl text-amber-950">Rayquaza VMAX (Alt Art)</h3>
+                                    <p class="text-xs text-amber-900/60 font-semibold">Evolving Skies • #218/203</p>
+                                </div>
+                                <span class="bg-sage-100 text-sage-600 text-xs font-bold px-2.5 py-1 rounded-lg">PSA 10 Gem Mint</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-3 border-t border-cream-200">
+                                <div>
+                                    <span class="text-xs text-amber-900/50 block font-semibold">Price</span>
+                                    <span class="text-2xl font-bold text-terracotta-600">$385.00</span>
+                                </div>
+                                <button type="button" data-add-to-cart="rayquaza-vmax-psa10" class="px-5 py-2.5 bg-amber-950 hover:bg-amber-900 text-white font-bold rounded-xl text-sm transition-all shadow">
+                                    Add To Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Inventory Catalog Section -->
+        <section id="catalog" class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-6">
+                    <div>
+                        <h2 class="text-3xl font-bold text-amber-950 mb-2">Curated Inventory</h2>
+                        <p class="text-amber-900/70 text-sm max-w-lg font-medium">All singles are sleeved, top-loaded, and inspected for accuracy before shipment or local pickup.</p>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="relative w-full lg:w-80">
+                        <label for="catalogSearch" class="sr-only">Search the catalog</label>
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-amber-900/40 text-sm pointer-events-none"></i>
+                        <input id="catalogSearch" type="search" placeholder="Search cards, sets, apparel..." autocomplete="off"
+                               class="w-full bg-white border border-cream-300 focus:border-terracotta-500 rounded-xl pl-10 pr-4 py-3 text-sm text-amber-950 focus:outline-none transition-all font-medium">
+                    </div>
+                </div>
+
+                <!-- Category tabs -->
+                <div id="filterTabs" class="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Catalog categories">
+                    <button type="button" role="tab" data-filter="all" aria-selected="true" class="filter-btn px-4 py-2 rounded-xl font-bold text-xs shadow-sm transition-all">All Cards</button>
+                    <button type="button" role="tab" data-filter="singles" aria-selected="false" class="filter-btn px-4 py-2 rounded-xl font-bold text-xs transition-all">Graded Singles</button>
+                    <button type="button" role="tab" data-filter="sealed" aria-selected="false" class="filter-btn px-4 py-2 rounded-xl font-bold text-xs transition-all">Sealed Packs</button>
+                    <button type="button" role="tab" data-filter="apparel" aria-selected="false" class="filter-btn px-4 py-2 rounded-xl font-bold text-xs transition-all">Cat Apparel</button>
+                </div>
+
+                <!-- Products Grid (rendered from the PRODUCTS list in the script below) -->
+                <div id="productGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+
+                <!-- Empty State -->
+                <div id="catalogEmpty" class="hidden text-center py-16 bg-white rounded-2xl border border-cream-200">
+                    <p class="text-4xl mb-2">🙀</p>
+                    <p class="font-bold text-amber-950">No items match your search.</p>
+                    <p class="text-sm text-amber-900/60 font-medium mt-1">Looking for something specific?
+                        <a href="#contact" data-contact data-contact-subject="Card Single / Inventory Inquiry" class="text-terracotta-600 font-bold underline">Contact us</a> and we'll hunt it down.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section id="community" class="py-16 bg-cream-100/60 border-t border-cream-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-terracotta-500/10 text-terracotta-600 font-bold text-xs uppercase tracking-wider mb-2">
+                        <i class="fa-solid fa-users"></i> Charlotte TCG Community
+                    </span>
+                    <h2 class="text-3xl font-bold text-amber-950">Collect, Trade & Hang Out</h2>
+                    <p class="text-amber-900/70 text-sm mt-2 max-w-xl mx-auto font-medium">
+                        The Card Cat is more than a shop — it's a friendly corner of Charlotte for collectors, players, and cat lovers alike.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-2xl p-6 border border-cream-200 card-shadow">
+                        <div class="w-12 h-12 rounded-xl bg-terracotta-500/10 text-terracotta-600 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-right-left"></i></div>
+                        <h3 class="font-bold text-lg text-amber-950 mb-1">Trade Nights</h3>
+                        <p class="text-sm text-amber-900/70 font-medium">Bring your binder, swap duplicates, and get friendly advice on grading and pricing.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 border border-cream-200 card-shadow">
+                        <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-600 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-box-open"></i></div>
+                        <h3 class="font-bold text-lg text-amber-950 mb-1">Pack Opening Meetups</h3>
+                        <p class="text-sm text-amber-900/70 font-medium">Rip new sets together and celebrate the big pulls with fellow collectors.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 border border-cream-200 card-shadow">
+                        <div class="w-12 h-12 rounded-xl bg-amber-950/5 text-amber-950 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-cat"></i></div>
+                        <h3 class="font-bold text-lg text-amber-950 mb-1">Shelter Charity Events</h3>
+                        <p class="text-sm text-amber-900/70 font-medium">Community fundraisers where every trade and raffle ticket helps local rescue cats.</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <a href="#contact" data-contact data-contact-subject="Community Events & Meetups" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-950 hover:bg-amber-900 text-white font-bold text-sm transition-all shadow">
+                        <i class="fa-solid fa-calendar-days"></i> Ask About Upcoming Events
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section id="mission" class="py-16 bg-sage-100/50 border-y border-sage-500/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-3xl p-8 sm:p-12 card-shadow border border-sage-500/20 grid lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-8 space-y-4">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sage-500/10 text-sage-600 font-bold text-xs uppercase tracking-wider">
+                            <i class="fa-solid fa-heart"></i> Charlotte Feline Support
+                        </span>
+                        <h2 class="text-3xl font-bold text-amber-950">Every Sale Helps Local Cat Rescues</h2>
+                        <p class="text-amber-900/80 font-medium text-base leading-relaxed">
+                            At The Card Cat, our passion isn't limited to shiny cardboard—we are actively committed to helping stray and shelter cats in Charlotte, North Carolina. A percentage of proceeds go directly toward funding cat food, vet checkups, and building towards our vision of a local combined TCG shop and Cat Café!
+                        </p>
+                        <div class="flex flex-wrap gap-6 pt-2 text-sm font-bold text-amber-950">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-sage-100 flex items-center justify-center text-sage-600"><i class="fa-solid fa-paw"></i></div>
+                                Shelter Food Donations
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-sage-100 flex items-center justify-center text-sage-600"><i class="fa-solid fa-house-chimney-medical"></i></div>
+                                Foster Care Support
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-4 bg-cream-100 p-6 rounded-2xl border border-cream-200 text-center space-y-3">
+                        <div class="text-4xl">🐱☕✨</div>
+                        <h3 class="font-bold text-lg text-amber-950">Cat Café Vision</h3>
+                        <p class="text-xs text-amber-900/70 font-medium">Looking to partner or sponsor our Charlotte shelter events? Reach out directly via our contact form below!</p>
+                        <a href="#contact" data-contact data-contact-subject="Charlotte Shelter / Cat Café Partnership" class="inline-block w-full py-2.5 rounded-xl bg-sage-600 hover:bg-sage-500 text-white font-bold text-sm transition-all shadow-sm">
+                            Partner With Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section (Netlify Forms) -->
+        <section id="contact" class="py-16">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center mb-10">
+                    <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-terracotta-500/10 text-terracotta-600 font-bold text-xs uppercase tracking-wider mb-2">
+                        📩 Contact Us
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-amber-950">Contact The Card Cat</h2>
+                    <p class="text-amber-900/70 text-sm mt-2 max-w-lg mx-auto font-medium">
+                        Have a question about card availability, sealed products, or cat shelter partnerships? Send us a message below and it goes straight to <strong class="text-amber-950">contact@thecardcat.biz</strong>.
+                    </p>
+                </div>
+
+                <div id="contactCard" class="bg-white rounded-3xl p-6 sm:p-10 card-shadow border border-cream-200">
+                    
+                    <form 
+                        id="contactForm" 
+                        name="contact" 
+                        method="POST" 
+                        data-netlify="true" 
+                        netlify-honeypot="bot-field"
+                        action="/"
+                        class="space-y-5"
+                    >
+                        <input type="hidden" name="form-name" value="contact" />
+                        <p class="hidden">
+                            <label>Don’t fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+                        </p>
+
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="contactName" class="block text-xs font-bold text-amber-950 uppercase tracking-wider mb-1.5">
+                                    Your Name <span class="text-terracotta-600">*</span>
+                                </label>
+                                <input 
+                                    id="contactName"
+                                    type="text" 
+                                    name="name" 
+                                    required 
+                                    autocomplete="name"
+                                    placeholder="Jane Doe" 
+                                    class="w-full bg-cream-50/50 border border-cream-300 focus:border-terracotta-500 focus:bg-white rounded-xl px-4 py-3 text-sm text-amber-950 focus:outline-none transition-all font-medium"
+                                >
+                            </div>
+                            <div>
+                                <label for="contactEmail" class="block text-xs font-bold text-amber-950 uppercase tracking-wider mb-1.5">
+                                    Email Address <span class="text-terracotta-600">*</span>
+                                </label>
+                                <input 
+                                    id="contactEmail"
+                                    type="email" 
+                                    name="email" 
+                                    required 
+                                    autocomplete="email"
+                                    placeholder="you@example.com" 
+                                    class="w-full bg-cream-50/50 border border-cream-300 focus:border-terracotta-500 focus:bg-white rounded-xl px-4 py-3 text-sm text-amber-950 focus:outline-none transition-all font-medium"
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="contactSubject" class="block text-xs font-bold text-amber-950 uppercase tracking-wider mb-1.5">
+                                Subject <span class="text-terracotta-600">*</span>
+                            </label>
+                            <input
+                                id="contactSubject"
+                                type="text"
+                                name="subject"
+                                required
+                                list="subjectOptions"
+                                placeholder="e.g. Card Single / Inventory Inquiry"
+                                class="w-full bg-cream-50/50 border border-cream-300 focus:border-terracotta-500 focus:bg-white rounded-xl px-4 py-3 text-sm text-amber-950 focus:outline-none transition-all font-medium"
+                            >
+                            <datalist id="subjectOptions">
+                                <option value="Card Single / Inventory Inquiry"></option>
+                                <option value="Sealed Product Pre-Orders"></option>
+                                <option value="Cat Apparel"></option>
+                                <option value="Order Request"></option>
+                                <option value="Community Events & Meetups"></option>
+                                <option value="Charlotte Shelter / Cat Café Partnership"></option>
+                                <option value="General Question"></option>
+                            </datalist>
+                        </div>
+
+                        <div>
+                            <label for="contactMessage" class="block text-xs font-bold text-amber-950 uppercase tracking-wider mb-1.5">
+                                Message <span class="text-terracotta-600">*</span>
+                            </label>
+                            <textarea 
+                                id="contactMessage"
+                                name="message" 
+                                rows="5" 
+                                required 
+                                placeholder="Hi! I'm looking for specific singles from Evolving Skies..." 
+                                class="w-full bg-cream-50/50 border border-cream-300 focus:border-terracotta-500 focus:bg-white rounded-xl px-4 py-3 text-sm text-amber-950 focus:outline-none transition-all font-medium"
+                            ></textarea>
+                        </div>
+
+                        <button 
+                            type="submit" 
+                            id="submitBtn"
+                            class="w-full py-4 rounded-xl bg-terracotta-500 hover:bg-terracotta-600 disabled:opacity-60 disabled:cursor-wait text-white font-bold text-base transition-all shadow-md shadow-terracotta-500/20 flex items-center justify-center gap-2"
+                        >
+                            <span>Send Message</span>
+                            <i class="fa-solid fa-paper-plane text-sm"></i>
+                        </button>
+                    </form>
+
+                    <!-- Submission Feedback -->
+                    <div id="formFeedback" role="status" aria-live="polite" class="hidden mt-4 p-4 rounded-xl text-center font-semibold text-sm"></div>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Slide-over Cart Drawer (hidden from hit-testing while closed, see #cartDrawer styles) -->
+    <div id="cartDrawer" class="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
+        <!-- Backdrop -->
+        <div id="cartBackdrop" class="absolute inset-0 bg-amber-950/40 backdrop-blur-sm"></div>
+
+        <!-- Content panel -->
+        <div id="cartPanel" class="absolute inset-y-0 right-0 w-full max-w-md bg-white card-shadow flex flex-col">
+                
+            <div class="p-6 border-b border-cream-200 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-basket-shopping text-terracotta-600 text-xl"></i>
+                    <h2 id="cartTitle" class="text-xl font-bold text-amber-950">Your Cart</h2>
+                </div>
+                <button id="closeCartBtn" type="button" aria-label="Close cart" class="p-2 text-amber-900/60 hover:text-amber-950 rounded-lg">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Items List -->
+            <div id="cartItems" class="p-6 overflow-y-auto flex-1 divide-y divide-cream-100"></div>
+
+            <!-- Footer Summary -->
+            <div class="p-6 border-t border-cream-200 bg-cream-50/50 space-y-4">
+                <div class="flex items-center justify-between font-bold text-lg text-amber-950">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal">$0.00</span>
+                </div>
+                <p class="text-xs text-amber-900/60 font-medium">Taxes and local Charlotte pickup / shipping are confirmed by email when we reply to your order request.</p>
+                <button id="checkoutBtn" type="button" class="w-full py-3.5 rounded-xl bg-terracotta-500 hover:bg-terracotta-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold transition-all shadow-md">
+                    Proceed To Checkout
+                </button>
+                <div class="flex items-center justify-between text-xs font-bold">
+                    <button id="continueShoppingBtn" type="button" class="text-amber-900/70 hover:text-terracotta-600">
+                        <i class="fa-solid fa-arrow-left"></i> Continue shopping
+                    </button>
+                    <button id="clearCartBtn" type="button" class="text-amber-900/50 hover:text-terracotta-600 disabled:opacity-40 disabled:cursor-not-allowed">
+                        Clear cart
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-amber-950 text-cream-100 py-12 border-t border-amber-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 items-center justify-between pb-8 border-b border-amber-900/60">
+                <a href="#top" class="flex items-center gap-3 justify-center md:justify-start">
+                    <div class="w-10 h-10 rounded-xl bg-terracotta-500 text-white flex items-center justify-center text-xl">🐾</div>
+                    <div>
+                        <span class="font-heading font-bold text-xl block leading-none text-white">The Card Cat</span>
+                        <span class="text-xs text-cream-300/70">thecardcat.biz</span>
+                    </div>
+                </a>
+
+                <nav class="flex flex-wrap items-center justify-center gap-6 text-sm font-semibold text-cream-200/80" aria-label="Footer">
+                    <a href="#catalog" class="hover:text-terracotta-500 transition-colors">Catalog</a>
+                    <a href="#community" class="hover:text-terracotta-500 transition-colors">Community</a>
+                    <a href="#mission" class="hover:text-terracotta-500 transition-colors">Mission</a>
+                    <a href="#contact" data-contact class="hover:text-terracotta-500 transition-colors">Contact</a>
+                </nav>
+
+                <div class="flex items-center justify-center md:justify-end gap-3 text-sm text-cream-300">
+                    <a href="mailto:contact@thecardcat.biz" class="inline-flex items-center gap-2 hover:text-terracotta-500 transition-colors">
+                        <i class="fa-solid fa-envelope"></i> contact@thecardcat.biz
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-8 text-center text-xs text-cream-300/50 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>© 2026 The Card Cat • Charlotte, NC. All rights reserved.</p>
+                <p>Not affiliated with Nintendo, Game Freak, or The Pokémon Company.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Client JavaScript -->
+    <script>
+        // Product catalog. `category` maps to the filter tabs: singles | sealed | apparel.
+        const PRODUCTS = [
+            { id: 'rayquaza-vmax-psa10', title: 'Rayquaza VMAX (Alt Art)', set: 'Evolving Skies • #218/203', price: 385, category: 'singles', badge: 'PSA 10', badgeClass: 'bg-sage-600', image: 'https://images.pokemontcg.io/swsh7/218_hir.png' },
+            { id: 'charizard-vmax', title: 'Charizard VMAX', set: 'Vivid Voltage • #044/185', price: 42, category: 'singles', badge: 'NM/Mint', badgeClass: 'bg-amber-950', image: 'https://images.pokemontcg.io/swsh4/44_hir.png' },
+            { id: 'gengar-vmax-psa9', title: 'Gengar VMAX Alt Art', set: 'Fusion Strike • #251/264', price: 215, category: 'singles', badge: 'PSA 9', badgeClass: 'bg-sage-600', image: 'https://images.pokemontcg.io/swsh8/251_hir.png' },
+            { id: 'arceus-vstar', title: 'Arceus VSTAR Secret', set: 'Brilliant Stars • #172/172', price: 24, category: 'singles', badge: 'NM/Mint', badgeClass: 'bg-amber-950', image: 'https://images.pokemontcg.io/swsh9/172_hir.png' },
+            { id: 'sv-151-bundle', title: 'Scarlet & Violet: 151 Bundle', set: '6 Sealed Booster Packs', price: 38.5, category: 'sealed', badge: 'Sealed', badgeClass: 'bg-terracotta-500', image: 'https://images.pokemontcg.io/sv3pt5/logo.png', imageClass: 'p-4' },
+            { id: 'card-cat-tee', title: 'The Card Cat Logo Tee', set: 'Unisex cotton • S–XXL', price: 28, category: 'apparel', badge: 'Apparel', badgeClass: 'bg-terracotta-500', image: 'https://placehold.co/300x400/E06D53/FFFFFF?text=Card+Cat+Tee' },
+            { id: 'paws-pokemon-hoodie', title: 'Paws & Pokemon Hoodie', set: 'Fleece pullover • S–XXL', price: 48, category: 'apparel', badge: 'Apparel', badgeClass: 'bg-terracotta-500', image: 'https://placehold.co/300x400/3D2A1D/FFFFFF?text=Paws+%26+Pokemon+Hoodie' }
+        ];
+
+        const formatPrice = (n) => `$${n.toFixed(2)}`;
+        const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        const fallbackImage = (title) => `https://placehold.co/300x400/EFE7D8/3D2A1D?text=${encodeURIComponent(title)}`;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.querySelector('header');
+
+            // ---------- Smooth scrolling navigation ----------
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+            function setMobileMenu(open) {
+                mobileMenu.classList.toggle('hidden', !open);
+                mobileMenuBtn.setAttribute('aria-expanded', String(open));
+            }
+
+            mobileMenuBtn.addEventListener('click', () => setMobileMenu(mobileMenu.classList.contains('hidden')));
+
+            function scrollToSection(id) {
+                const target = id === 'top' ? document.body : document.getElementById(id);
+                if (!target) return;
+                if (id === 'top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const offset = header.offsetHeight + 16;
+                    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+                history.replaceState(null, '', id === 'top' ? location.pathname : `#${id}`);
+            }
+
+            document.addEventListener('click', (e) => {
+                const link = e.target.closest('a[href^="#"]');
+                if (!link) return;
+                const id = link.getAttribute('href').slice(1);
+                if (!id || !(id === 'top' || document.getElementById(id))) return;
+                e.preventDefault();
+                setMobileMenu(false);
+                if (link.hasAttribute('data-contact')) {
+                    openContactForm(link.dataset.contactSubject);
+                } else {
+                    scrollToSection(id);
+                }
+            });
+
+            // ---------- Contact form ----------
+            const contactForm = document.getElementById('contactForm');
+            const contactCard = document.getElementById('contactCard');
+            const formFeedback = document.getElementById('formFeedback');
+            const submitBtn = document.getElementById('submitBtn');
+            const subjectInput = document.getElementById('contactSubject');
+            const messageInput = document.getElementById('contactMessage');
+            const nameInput = document.getElementById('contactName');
+            const submitBtnHtml = submitBtn.innerHTML;
+
+            // Scrolls to the contact form, optionally pre-filling it, and focuses the first empty field.
+            function openContactForm(subject, message) {
+                if (subject) subjectInput.value = subject;
+                if (message) messageInput.value = message;
+                formFeedback.classList.add('hidden');
+                scrollToSection('contact');
+
+                contactCard.classList.remove('form-highlight');
+                void contactCard.offsetWidth; // restart animation
+                contactCard.classList.add('form-highlight');
+
+                const firstEmpty = [nameInput, document.getElementById('contactEmail'), subjectInput, messageInput].find((el) => !el.value.trim());
+                setTimeout(() => (firstEmpty || nameInput).focus({ preventScroll: true }), 500);
+            }
+
+            function showFeedback(ok, text) {
+                formFeedback.textContent = text;
+                formFeedback.className = `mt-4 p-4 rounded-xl text-center font-semibold text-sm border ${ok
+                    ? 'bg-sage-100 border-sage-500/30 text-sage-600'
+                    : 'bg-terracotta-500/10 border-terracotta-500/30 text-terracotta-700'}`;
+            }
+
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<span>Sending...</span> <i class="fa-solid fa-spinner animate-spin"></i>`;
+
+                try {
+                    const response = await fetch('/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams(new FormData(contactForm)).toString()
+                    });
+                    if (!response.ok) throw new Error(`Status ${response.status}`);
+                    contactForm.reset();
+                    showFeedback(true, '🐾 Thank you! Your message has been sent to contact@thecardcat.biz. We will get back to you shortly!');
+                } catch (err) {
+                    showFeedback(false, 'Sorry, your message could not be sent. Please try again, or email us directly at contact@thecardcat.biz.');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = submitBtnHtml;
+                }
+            });
+
+            // ---------- Catalog filters & search ----------
+            const productGrid = document.getElementById('productGrid');
+            const catalogEmpty = document.getElementById('catalogEmpty');
+            const searchInput = document.getElementById('catalogSearch');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            let activeFilter = 'all';
+
+            productGrid.innerHTML = PRODUCTS.map((p) => `
+                <div class="product-card bg-white rounded-2xl p-4 border border-cream-200 card-shadow card-shadow-hover transition-all flex flex-col justify-between" data-category="${p.category}" data-search="${escapeHtml(`${p.title} ${p.set} ${p.badge}`.toLowerCase())}">
+                    <div>
+                        <div class="bg-cream-50 rounded-xl p-3 mb-3 flex justify-center relative">
+                            <span class="absolute top-2 left-2 ${p.badgeClass} text-white text-[10px] font-bold px-2 py-0.5 rounded">${escapeHtml(p.badge)}</span>
+                            <img src="${p.image}" alt="${escapeHtml(p.title)}" loading="lazy" class="h-48 object-contain ${p.imageClass || ''}" onerror="this.onerror=null;this.src='${fallbackImage(p.title)}'">
+                        </div>
+                        <h3 class="font-bold text-amber-950 text-base mb-1">${escapeHtml(p.title)}</h3>
+                        <p class="text-xs text-amber-900/60 font-semibold mb-3">${escapeHtml(p.set)}</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-cream-100">
+                        <span class="text-xl font-bold text-terracotta-600">${formatPrice(p.price)}</span>
+                        <button type="button" data-add-to-cart="${p.id}" class="inline-flex items-center gap-2 px-3 py-2.5 rounded-xl bg-cream-200 hover:bg-terracotta-500 hover:text-white text-amber-950 font-bold text-xs transition-all">
+                            <i class="fa-solid fa-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            function applyCatalogFilters() {
+                const query = searchInput.value.trim().toLowerCase();
+                let visible = 0;
+                productGrid.querySelectorAll('.product-card').forEach((card) => {
+                    const matchesCategory = activeFilter === 'all' || card.dataset.category === activeFilter;
+                    const matchesSearch = !query || card.dataset.search.includes(query);
+                    const show = matchesCategory && matchesSearch;
+                    card.style.display = show ? '' : 'none';
+                    if (show) visible++;
+                });
+                catalogEmpty.classList.toggle('hidden', visible > 0);
+            }
+
+            function setActiveFilter(filter) {
+                activeFilter = filter;
+                filterButtons.forEach((btn) => {
+                    const active = btn.dataset.filter === filter;
+                    btn.setAttribute('aria-selected', String(active));
+                    btn.classList.toggle('bg-terracotta-500', active);
+                    btn.classList.toggle('text-white', active);
+                    btn.classList.toggle('bg-cream-200/70', !active);
+                    btn.classList.toggle('text-amber-950', !active);
+                    btn.classList.toggle('hover:bg-cream-200', !active);
+                });
+                applyCatalogFilters();
+            }
+
+            filterButtons.forEach((btn) => btn.addEventListener('click', () => setActiveFilter(btn.dataset.filter)));
+            searchInput.addEventListener('input', applyCatalogFilters);
+            setActiveFilter('all');
+
+            // ---------- Cart ----------
+            const cartDrawer = document.getElementById('cartDrawer');
+            const cartBtn = document.getElementById('cartBtn');
+            const cartItems = document.getElementById('cartItems');
+            const cartBadge = document.getElementById('cartBadge');
+            const cartSubtotal = document.getElementById('cartSubtotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            const clearCartBtn = document.getElementById('clearCartBtn');
+            const CART_KEY = 'thecardcat-cart';
+
+            let cart = [];
+            try {
+                cart = (JSON.parse(localStorage.getItem(CART_KEY)) || [])
+                    .filter((item) => PRODUCTS.some((p) => p.id === item.id) && item.qty > 0);
+            } catch (err) {
+                cart = [];
+            }
+
+            const productById = (id) => PRODUCTS.find((p) => p.id === id);
+
+            function toggleCart(show) {
+                cartDrawer.classList.toggle('is-open', show);
+                cartDrawer.setAttribute('aria-hidden', String(!show));
+                cartBtn.setAttribute('aria-expanded', String(show));
+                document.body.style.overflow = show ? 'hidden' : '';
+                if (show) document.getElementById('closeCartBtn').focus({ preventScroll: true });
+            }
+
+            function addToCart(id) {
+                if (!productById(id)) return;
+                const existing = cart.find((item) => item.id === id);
+                if (existing) {
+                    existing.qty += 1;
+                } else {
+                    cart.push({ id, qty: 1 });
+                }
+                updateCartUI();
+                toggleCart(true);
+            }
+
+            function changeQty(id, delta) {
+                const item = cart.find((i) => i.id === id);
+                if (!item) return;
+                item.qty += delta;
+                if (item.qty <= 0) cart = cart.filter((i) => i.id !== id);
+                updateCartUI();
+            }
+
+            function removeFromCart(id) {
+                cart = cart.filter((i) => i.id !== id);
+                updateCartUI();
+            }
+
+            function cartTotals() {
+                return cart.reduce((acc, item) => {
+                    acc.qty += item.qty;
+                    acc.price += productById(item.id).price * item.qty;
+                    return acc;
+                }, { qty: 0, price: 0 });
+            }
+
+            function updateCartUI() {
+                localStorage.setItem(CART_KEY, JSON.stringify(cart));
+                const totals = cartTotals();
+
+                cartBadge.textContent = totals.qty;
+                cartBadge.classList.toggle('scale-0', totals.qty === 0);
+                cartSubtotal.textContent = formatPrice(totals.price);
+                checkoutBtn.disabled = cart.length === 0;
+                clearCartBtn.disabled = cart.length === 0;
+
+                if (cart.length === 0) {
+                    cartItems.innerHTML = `
+                        <div class="text-center py-12 text-amber-900/50">
+                            <p class="text-4xl mb-2">🐾</p>
+                            <p class="font-semibold text-sm">Your basket is empty!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                cartItems.innerHTML = cart.map((item) => {
+                    const p = productById(item.id);
+                    return `
+                        <div class="py-4 flex items-center justify-between gap-4">
+                            <div class="min-w-0">
+                                <h4 class="font-bold text-sm text-amber-950">${escapeHtml(p.title)}</h4>
+                                <p class="text-xs text-amber-900/60 font-semibold">${escapeHtml(p.set)}</p>
+                                <span class="text-xs font-bold text-terracotta-600">${formatPrice(p.price)} each • ${formatPrice(p.price * item.qty)}</span>
+                            </div>
+                            <div class="flex items-center gap-2 shrink-0">
+                                <div class="flex items-center rounded-lg border border-cream-300 overflow-hidden">
+                                    <button type="button" data-cart-action="decrease" data-id="${p.id}" aria-label="Decrease quantity of ${escapeHtml(p.title)}" class="w-8 h-8 flex items-center justify-center text-amber-950 hover:bg-cream-100">
+                                        <i class="fa-solid fa-minus text-xs"></i>
+                                    </button>
+                                    <span class="w-8 text-center text-sm font-bold text-amber-950" aria-live="polite">${item.qty}</span>
+                                    <button type="button" data-cart-action="increase" data-id="${p.id}" aria-label="Increase quantity of ${escapeHtml(p.title)}" class="w-8 h-8 flex items-center justify-center text-amber-950 hover:bg-cream-100">
+                                        <i class="fa-solid fa-plus text-xs"></i>
+                                    </button>
+                                </div>
+                                <button type="button" data-cart-action="remove" data-id="${p.id}" aria-label="Remove ${escapeHtml(p.title)}" class="p-1.5 text-amber-900/40 hover:text-terracotta-600 transition-colors">
+                                    <i class="fa-solid fa-trash text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // "Add to Cart" buttons anywhere on the page
+            document.addEventListener('click', (e) => {
+                const btn = e.target.closest('[data-add-to-cart]');
+                if (btn) addToCart(btn.dataset.addToCart);
+            });
+
+            // Quantity controls inside the drawer
+            cartItems.addEventListener('click', (e) => {
+                const btn = e.target.closest('[data-cart-action]');
+                if (!btn) return;
+                const { cartAction, id } = btn.dataset;
+                if (cartAction === 'increase') changeQty(id, 1);
+                if (cartAction === 'decrease') changeQty(id, -1);
+                if (cartAction === 'remove') removeFromCart(id);
+            });
+
+            cartBtn.addEventListener('click', () => toggleCart(true));
+            document.getElementById('closeCartBtn').addEventListener('click', () => toggleCart(false));
+            document.getElementById('cartBackdrop').addEventListener('click', () => toggleCart(false));
+            document.getElementById('continueShoppingBtn').addEventListener('click', () => {
+                toggleCart(false);
+                scrollToSection('catalog');
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && cartDrawer.classList.contains('is-open')) toggleCart(false);
+            });
+
+            clearCartBtn.addEventListener('click', () => {
+                cart = [];
+                updateCartUI();
+            });
+
+            // Checkout sends an order request through the contact form so it lands in the shop inbox.
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length === 0) return;
+                const totals = cartTotals();
+                const lines = cart.map((item) => {
+                    const p = productById(item.id);
+                    return `- ${item.qty} x ${p.title} (${p.set}) @ ${formatPrice(p.price)} = ${formatPrice(p.price * item.qty)}`;
+                });
+                const message = [
+                    'Hi! I would like to order the following items:',
+                    '',
+                    ...lines,
+                    '',
+                    `Subtotal: ${formatPrice(totals.price)}`,
+                    '',
+                    'Preferred delivery (local Charlotte pickup or shipping): '
+                ].join('\n');
+                toggleCart(false);
+                openContactForm('Order Request', message);
+            });
+
+            updateCartUI();
+
+            // Honor a section hash on initial load (e.g. /#contact)
+            if (location.hash.length > 1 && document.getElementById(location.hash.slice(1))) {
+                setTimeout(() => scrollToSection(location.hash.slice(1)), 50);
+            }
+        });
+    </script>
+</body>
+</html>
